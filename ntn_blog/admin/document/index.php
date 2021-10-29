@@ -207,7 +207,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </thead>
         <tbody>
         <?php 
-         $sql="Select * from document ,subject ";
+         $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+          from document left join subject on document.id_subject=subject.id";
+     
          $rs=mysqli_query($con,$sql); 
          while ($row=mysqli_fetch_array($rs)) { ?>
             
@@ -216,7 +218,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td><?php echo $row['title'];?></td>
             <td><?php echo $row['filewd'];?></td>
-            <td>Jul 22, 2013</td>
+            <td><?php echo $row['subject_subject_name'];?></td>
             <td>
               <a href="" ui-toggle-class=""><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
             </td>
