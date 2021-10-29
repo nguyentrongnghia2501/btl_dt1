@@ -183,10 +183,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
       <div class="col-sm-3">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="Search">
-          <span class="input-group-btn">
+         <form action="search.php" method="post"> 
+           <input type="text" class="input-sm form-control" name="search" placeholder="Search">
+           <span class="input-group-btn">           
             <button class="btn btn-sm btn-default" type="button">Go!</button>
-          </span>
+         
+          </span> 
+        </form>
         </div>
       </div>
     </div>
@@ -222,7 +225,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <td><?php echo $row['subject_subject_name'];?></td>
             <td><?php echo $row['created_at'];?></td>
             <td>
-           <a href=""><i class="fas fa-file-download"></i></a>
+           <a href="download.php?file=<?php echo $row['filewd'] ?>"><i class="fas fa-file-download"></i></a>
             <a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
             <a href="add_document.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
            <a href=""><i class="fa fa-info-circle"></i></a>

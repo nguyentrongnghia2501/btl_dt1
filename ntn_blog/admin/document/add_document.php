@@ -10,8 +10,8 @@ if (!empty($_POST)) {
 		$title = $_POST['title'];
 		$title = str_replace('"', '\\"', $title);
 	}
-	if (isset($_POST['id'])) {
-		$id = $_POST['id'];
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
 	}
 	
 	if (isset($_FILES['filewd'])) {
@@ -29,8 +29,8 @@ if (!empty($_POST)) {
 		$created_at = $updated_at = date('Y-m-d H:s:i');
         if($id)
         {
-           $sql="UPDATE `document` SET `id`='[value-1]',`title`='[value-2]',`filewd`='[value-3]',
-           `id_subject`='[value-4]',`created_at`='[value-5]',`updated_at`='[value-6]' WHERE 1";
+           $sql="UPDATE `document` SET `title`='$title',`filewd`='$filewd',
+           `id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
         }
 		else{
             $sql="INSERT INTO `document`( `title`, `filewd`, `id_subject`, `created_at`, `updated_at`) 
