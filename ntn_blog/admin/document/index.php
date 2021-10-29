@@ -27,6 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="../../public/css/monthly.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 <script src="../../public/js/jquery2.0.3.min.js"></script>
 <script src="../../public/js/raphael-min.js"></script>
 <script src="../../public/js/morris.js"></script>
@@ -202,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <th>File</th>
             <th>Môn Học</th>
             <th>Ngày tạo</th>
-            <th style="width:30px;"></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -219,8 +220,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <td><?php echo $row['title'];?></td>
             <td><?php echo $row['filewd'];?></td>
             <td><?php echo $row['subject_subject_name'];?></td>
+            <td><?php echo $row['created_at'];?></td>
             <td>
-              <a href="" ui-toggle-class=""><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+           <a href=""><i class="fas fa-file-download"></i></a>
+            <a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
+            <a href="add_document.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
+           <a href=""><i class="fa fa-info-circle"></i></a>
             </td>
           </tr>
 

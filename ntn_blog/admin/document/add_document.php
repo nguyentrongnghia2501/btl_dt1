@@ -24,10 +24,18 @@ if (!empty($_POST)) {
 	}
 
 	if (!empty($title)) {
+
         move_uploaded_file($_FILES['filewd']['tmp_name'],"upload/".$_FILES['filewd']['name']);
 		$created_at = $updated_at = date('Y-m-d H:s:i');
-		$sql="INSERT INTO `document`( `title`, `filewd`, `id_subject`, `created_at`, `updated_at`) 
-        VALUES ('$title','$filewd','$id_subject','$created_at','$updated_at')";
+        if($id)
+        {
+           $sql="UPDATE `document` SET `id`='[value-1]',`title`='[value-2]',`filewd`='[value-3]',
+           `id_subject`='[value-4]',`created_at`='[value-5]',`updated_at`='[value-6]' WHERE 1";
+        }
+		else{
+            $sql="INSERT INTO `document`( `title`, `filewd`, `id_subject`, `created_at`, `updated_at`) 
+            VALUES ('$title','$filewd','$id_subject','$created_at','$updated_at')";
+        }
 
 		executex($sql);
 
