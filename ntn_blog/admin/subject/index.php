@@ -120,7 +120,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <ul class="sub">
                         <li><a href="../document/index.php">Tài Liệu</a></li>
                         <li><a href="../document/add_document.php">Thêm tài liệu</a></li>
-						<li><a href="dropzone.html">Dropzone</a></li>
+					
                     </ul>
                 </li>
                 

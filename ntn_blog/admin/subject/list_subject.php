@@ -122,12 +122,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-tasks"></i>
-                                <span>Form Components</span>
+                                <span>Tài Liệu Môn Học</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="form_component.html">Form Elements</a></li>
-                                <li><a href="form_validation.html">Form Validation</a></li>
-                                <li><a href="dropzone.html">Dropzone</a></li>
+                                <li><a href="../document/index.php">Tài Liệu</a></li>
+                                <li><a href="../document/add_document.php">Thêm Tài Liệu</a></li>
+                              
                             </ul>
                         </li>
                         

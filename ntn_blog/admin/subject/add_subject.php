@@ -182,8 +182,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                             <ul class="sub">
                                 <li><a href="../document/index.php">Tài Liệu</a></li>
-                                <li><a href="form_validation.html">Thêm tài liệu</a></li>
-                                <li><a href="dropzone.html">Dropzone</a></li>
+                                <li><a href="../document/add_document.php">Thêm tài liệu</a></li>
+                               
                             </ul>
                         </li>
                         
