@@ -4,28 +4,41 @@ require_once("../../db/dbhepler.php");
 
 ?>
 <?php 
-$id = $price = $title = $filewd = $id_subject = '';
+$id = $name = $anh  =$pass=$point= $id_subject=$email = '';
 if (!empty($_POST)) {
-	if (isset($_POST['title'])) {
-		$title = $_POST['title'];
-		$title = str_replace('"', '\\"', $title);
+	if (isset($_POST['name'])) {
+		$name = $_POST['name'];
+		$name = str_replace('"', '\\"', $name);
 	}
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 	}
 	
-	if (isset($_FILES['filewd'])) {
-        $filewd=$_FILES['filewd']['name'];
+	if (isset($_FILES['avatar'])) {
+        $anh=$_FILES['avatar']['name'];
 
 	}
-
+    if (isset($_POST['pass'])) {
+        $pass=$_POST['pass'];
+        $pass = str_replace('"', '\\"', $pass);
+	}
+    if (isset($_POST['point'])) {
+        $point=$_POST['point'];
+        $point = str_replace('"', '\\"', $point);
+	}
+    if (isset($_POST['email'])) {
+        $email=$_POST['email'];
+        $email = str_replace('"', '\\"', $email);
+	}
 	if (isset($_POST['id_subject'])) {
 		$id_subject = $_POST['id_subject'];
 	}
-
-	if (!empty($title)) {
-
-        move_uploaded_file($_FILES['filewd']['tmp_name'],"upload/".$_FILES['filewd']['name']);
+    
+	if (!empty($name)) {
+        $tmp_name=$_FILES['avatar']['tmp_name'];
+        $anh=$_FILES['avatar']['name'];
+        move_uploaded_file($tmp_name,"../../public/images".$anh);
+        
 		$created_at = $updated_at = date('Y-m-d H:s:i');
         if($id)
         {
@@ -33,8 +46,8 @@ if (!empty($_POST)) {
            `id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
         }
 		else{
-            $sql="INSERT INTO `document`( `title`, `filewd`, `id_subject`, `created_at`, `updated_at`) 
-            VALUES ('$title','$filewd','$id_subject','$created_at','$updated_at')";
+            $sql="INSERT INTO `student`(`name_student`, `avatar`, `point`, `password`, `email`, `id_subject`, `created_at`, `updated_at`) 
+            VALUES ('$name','$anh','$point','$pass','$email','$id_subject','$created_at','$updated_at')";
         }
 
 		executex($sql);
@@ -43,12 +56,25 @@ if (!empty($_POST)) {
 		die();
 	}
 }
+if (isset($_GET['id'])) {
+    $id=$_GET['id'];
+    $sql= "SELECT * FROM student WHERE id=$id";
+    $student=executeSingleResult($sql);
+    if ($student != null) {
+       $name=$student['name_student'];
+       $anh=$student['avatar'];
+       $point=$student['point'];
+       $pass=$student['password'];
+       $email=$student['email'];
+       $id_subject=$student['id_subject'];
+    }
+}
 
 
 ?>
 <!DOCTYPE html>
 <head>
-<title>admin</title>
+<title>add_studet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -155,8 +181,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Quản Lý Sinh Viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="basic_table.html">Danh sách Sinh Viên</a></li>
-                        <li><a href="responsive_table.html">Responsive Table</a></li>
+
+                        <li><a href="index.php">Danh sách Sinh Viên</a></li>
+                        <li><a href="#ml">Thêm Sinh viên</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -170,16 +197,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="dropzone.html">Dropzone</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-envelope"></i>
-                        <span>Mail </span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="mail.php">Inbox</a></li>
-                        <li><a href="mail_compose.html">Compose Mail</a></li>
-                    </ul>
-                </li>
+               
                
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -215,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Document
+                            Sinh Viên
                             <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
                                
@@ -226,20 +244,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="position-center">
     <form role="form" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="exampleInputEmail1">Tên Tài Liệu :</label>
-        <input type="text" value="" name="title" class="form-control" id="exampleInputEmail1" placeholder="Tên Môn Học ...">
+        <label for="exampleInputEmail1">Tên sinh viên</label>
+        <input type="text" value="<?=$name?>" name="name" class="form-control" id="exampleInputEmail1" placeholder="Tên Môn Học ...">
     </div>
+  
    
     <div class="form-group">
-        <label for="exampleInputFile">File</label>
+        <label for="exampleInputFile">Ảnh đại diện</label>
        
-        <input type="file" name="filewd" id="exampleInputFile">
-        <!-- <img style="width: 150px;" src="../../public/images" alt=""> -->
+        <input type="file" name="avatar" id="exampleInputFile">
+        <img style="width: 150px;" src="../../public/images<?=$anh?>" alt="">
         
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Điểm</label>
+        <input type="number" value="<?=$point?>" name="point" class="form-control" id="exampleInputEmail1" placeholder="Điểm số ...">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">password</label>
+        <input type="password" value="<?=$pass?>" name="pass" class="form-control" id="exampleInputEmail1" placeholder="password ...">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">email</label>
+        <input type="email" value="<?=$email?>" name="email" class="form-control" id="exampleInputEmail1" placeholder="gmail ...">
     </div>
     
     <div>
-    <label for="email" class="form-label">Lựa Chọn Môn Học:</label>
+    <label for="email" class="form-label"> Môn Học Đang Học:</label>
     <br>
                             <select class="form-select" name="id_subject" size="3" aria-label="size 3 select example">
                                 <option selected>--Môn Học--</option>

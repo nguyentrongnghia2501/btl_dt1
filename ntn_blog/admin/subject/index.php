@@ -109,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
                         <li><a href="../students/index.php">Danh sách Sinh Viên</a></li>
-                        <li><a href="responsive_table.html">Responsive Table</a></li>
+                        <li><a href="../students/add_student.php">Thêm Sinh Viên</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

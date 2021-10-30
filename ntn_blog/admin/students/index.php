@@ -131,6 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                
                 <li class="sub-menu">
                     <a href="javascript:;">
+
                         <i class=" fa fa-bar-chart-o"></i>
                         <span>Maps</span>
                     </a>
@@ -160,7 +161,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            List Project
+                            Danh sách sinh viên
                         </div>
                         <div>
                             <table class="table" ui-jq="footable" ui-options='{
@@ -190,6 +191,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <tbody>
 
                                     <?php 
+                                   
                                  $sql="Select student.id,student.name_student,student.avatar,student.point,student.password,student.email,student.created_at,
                                  student.updated_at, subject.subject_name subject_subject_name
                                  from student left join subject on student.id_subject=subject.id";
@@ -199,14 +201,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <tr>
                                         <td><?php echo $index++ ?></td>
                                         <td><?php echo $row['name_student'];?></td>
-                                        
-                                        <td><?php echo $row['avatar'];?></td>
+                                        <img src="" alt="">
+                                        <td><img style="width: 100px;" src="../../public/images<?php echo $row['avatar'];?>" alt=""></td>
                                         <td><?php echo $row['point'];?></td>
                                         <td><?php echo $row['password'];?></td>
                                         <td><?php echo $row['subject_subject_name'];?></td>
                                         <td><?php echo $row['email'];?></td>
                                       <th data-breakpoints="xs"><a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-                                       <a href="add_subject.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
+                                       <a href="add_student.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
                                       <a href=""><i class="fa fa-info-circle"></i></a>
                                     </th>  
                                        
