@@ -160,8 +160,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                             <ul class="sub">
                                 <li><a href="list_subject.php">Danh sách Môn Học </a></li>
-                                <li><a href="glyphicon.html">Thêm Môn Học Mới </a></li>
-                                <li><a href="grids.html">Tài Liệu</a></li>
+                                <li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
+                               
                             </ul>
                         </li>
 
@@ -181,21 +181,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Tài Liệu Môn Học</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="form_component.html">Môn Học</a></li>
+                                <li><a href="../document/index.php">Tài Liệu</a></li>
                                 <li><a href="form_validation.html">Thêm tài liệu</a></li>
                                 <li><a href="dropzone.html">Dropzone</a></li>
                             </ul>
                         </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-envelope"></i>
-                                <span>Mail </span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="mail.html">Inbox</a></li>
-                                <li><a href="mail_compose.html">Compose Mail</a></li>
-                            </ul>
-                        </li>
+                        
 
                         <li class="sub-menu">
                             <a href="javascript:;">

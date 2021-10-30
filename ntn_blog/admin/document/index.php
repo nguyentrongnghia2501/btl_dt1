@@ -100,8 +100,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Môn Học</span>
                     </a>
                     <ul class="sub">
-						<li><a href="list_subject.php">Danh sách Môn Học </a></li>
-						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
+						<li><a href="../subject/">Danh sách Môn Học </a></li>
+						<li><a href="../subject/">Thêm Môn Học Mới </a></li>
                         <li><a href="../document/index.php">Tài Liệu</a></li>
                     </ul>
                 </li>
@@ -127,16 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="dropzone.html">Dropzone</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-envelope"></i>
-                        <span>Mail </span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="mail.php">Inbox</a></li>
-                        <li><a href="mail_compose.html">Compose Mail</a></li>
-                    </ul>
-                </li>
+                
                
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -171,26 +162,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-5 m-b-xs">
+       
+      
         <select class="input-sm form-control w-sm inline v-middle">
           <option value="0">Bulk action</option>
           <option value="1">Delete selected</option>
           <option value="2">Bulk edit</option>
           <option value="3">Export</option>
         </select>
+       
         <button class="btn btn-sm btn-default">Apply</button>                
       </div>
       <div class="col-sm-4">
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-3"> 
+        <form action="index.php" method="get">
         <div class="input-group">
-         <form action="search.php" method="post"> 
-           <input type="text" class="input-sm form-control" name="search" placeholder="Search">
+       
+           <input type="text" class="input-sm form-control" name="s" placeholder="Search">
            <span class="input-group-btn">           
-            <button class="btn btn-sm btn-default" type="button">Go!</button>
+         <input style="font-size: 15px;" type="submit" name="search" value="GO"> 
          
           </span> 
-        </form>
-        </div>
+       
+        </div> 
+      </form>
       </div>
     </div>
     <div class="table-responsive">
@@ -211,8 +207,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </thead>
         <tbody>
         <?php 
-         $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+        if(isset($_GET['s']) && $_GET['s']!=''){
+         
+         
+         
+          // if($title_search=='')
+          // {
+          //   $_SESSION['warrning']='Bạn Chưa nhập thông tin !';
+          // }
+          $sql='select  document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+           from `document`left join subject on document.id_subject=subject.id where `title` like "%'.$_GET['s'].'%" ';
+          // $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+          // from document left join subject on document.id_subject=subject.id where `title` like "%'.$_GET["s"].'%"";
+             
+        }
+        else{
+           $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
           from document left join subject on document.id_subject=subject.id";
+        }
+        
+
+        
      
          $rs=mysqli_query($con,$sql); 
          while ($row=mysqli_fetch_array($rs)) { ?>

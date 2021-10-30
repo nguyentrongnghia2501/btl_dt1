@@ -105,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul class="sub">
                                 <li><a href="list_subject.php">Danh sách Môn Học </a></li>
                                 <li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
-                                <li><a href="grids.html">Tài Liệu</a></li>
+                              
                             </ul>
                         </li>
 
@@ -130,16 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="dropzone.html">Dropzone</a></li>
                             </ul>
                         </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-envelope"></i>
-                                <span>Mail </span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="mail.html">Inbox</a></li>
-                                <li><a href="mail_compose.html">Compose Mail</a></li>
-                            </ul>
-                        </li>
+                        
 
                         <li class="sub-menu">
                             <a href="javascript:;">
