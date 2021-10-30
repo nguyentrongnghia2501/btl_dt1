@@ -1,8 +1,51 @@
 <?php 
 require_once("../../db/dbhepler.php");
 
+
 ?>
-<!-- ccsas -->
+<?php 
+$id = $price = $title = $filewd = $id_subject = '';
+if (!empty($_POST)) {
+	if (isset($_POST['title'])) {
+		$title = $_POST['title'];
+		$title = str_replace('"', '\\"', $title);
+	}
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+	
+	if (isset($_FILES['filewd'])) {
+        $filewd=$_FILES['filewd']['name'];
+
+	}
+
+	if (isset($_POST['id_subject'])) {
+		$id_subject = $_POST['id_subject'];
+	}
+
+	if (!empty($title)) {
+
+        move_uploaded_file($_FILES['filewd']['tmp_name'],"upload/".$_FILES['filewd']['name']);
+		$created_at = $updated_at = date('Y-m-d H:s:i');
+        if($id)
+        {
+           $sql="UPDATE `document` SET `title`='$title',`filewd`='$filewd',
+           `id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
+        }
+		else{
+            $sql="INSERT INTO `document`( `title`, `filewd`, `id_subject`, `created_at`, `updated_at`) 
+            VALUES ('$title','$filewd','$id_subject','$created_at','$updated_at')";
+        }
+
+		executex($sql);
+
+		header('Location: index.php');
+		die();
+	}
+}
+
+
+?>
 <!DOCTYPE html>
 <head>
 <title>admin</title>
@@ -102,7 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <ul class="sub">
 						<li><a href="../subject/list_subject.php">Danh sách Môn Học </a></li>
 						<li><a href="../subject/add_subject.php">Thêm Môn Học Mới </a></li>
-                        
+                        <li><a href="../document/index.php">Tài Liệu</a></li>
                     </ul>
                 </li>
                
@@ -112,8 +155,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Quản Lý Sinh Viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="index.php">Danh sách Sinh Viên</a></li>
-                        <li><a href="add_student.php">Thêm Sinh Viên</a></li>
+                        <li><a href="basic_table.html">Danh sách Sinh Viên</a></li>
+                        <li><a href="responsive_table.html">Responsive Table</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -122,12 +165,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Tài Liệu Môn Học </span>
                     </a>
                     <ul class="sub">
-                        <li><a href="../document/index.php">Tài Liệu</a></li>
-                        <li><a href="../document/add_document.php">Thêm tài liệu</a></li>
-					
+                        <li><a href="index.php">Môn Học</a></li>
+                        <li><a href="#">Thêm tài liệu</a></li>
+						<li><a href="dropzone.html">Dropzone</a></li>
                     </ul>
                 </li>
-                
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-envelope"></i>
+                        <span>Mail </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="mail.php">Inbox</a></li>
+                        <li><a href="mail_compose.html">Compose Mail</a></li>
+                    </ul>
+                </li>
                
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -157,71 +209,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	  
 
 	   <!-- trang chính -->
-       <div class="table-agile-info">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            List Project
-                        </div>
-                        <div>
-                            <table class="table" ui-jq="footable" ui-options='{
-        "paging": {
-          "enabled": true
-        },
-        "filtering": {
-          "enabled": true
-        },
-        "sorting": {
-          "enabled": true
-        }}'>
-                                <thead>
-                                    <tr>
-                                        <th data-breakpoints="xs">STT</th>
-                                        <th>Họ Và Tên</th>
-                                        <th>Ảnh Đại Diện</th>
-                                        <th>Điểm</th>
-                                        <th>password</th>
-                                        <th>Môn Đang Theo Học Học</th>
-                                        <th>Gmail</th>
-                                        
+       <div class="form-w3layouts">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Document
+                            <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                               
+                             </span>
+                        </header>
+                        <div class="panel-body">
 
-                                   
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php 
-                                 $sql="Select student.id,student.name_student,student.avatar,student.point,student.password,student.email,student.created_at,
-                                 student.updated_at, subject.subject_name subject_subject_name
-                                 from student left join subject on student.id_subject=subject.id";
-                                $rs= mysqli_query($con,$sql);
-                                $index=1;
-                                while ($row=mysqli_fetch_array($rs)) { ?>
-                                    <tr>
-                                        <td><?php echo $index++ ?></td>
-                                        <td><?php echo $row['name_student'];?></td>
-                                        
-                                        <td><?php echo $row['avatar'];?></td>
-                                        <td><?php echo $row['point'];?></td>
-                                        <td><?php echo $row['password'];?></td>
-                                        <td><?php echo $row['subject_subject_name'];?></td>
-                                        <td><?php echo $row['email'];?></td>
-                                      <th data-breakpoints="xs"><a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-                                       <a href="add_subject.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
-                                      <a href=""><i class="fa fa-info-circle"></i></a>
-                                    </th>  
-                                       
-                                    </tr>
-                                    <?php } ?>
-         
-         
+<div class="position-center">
+    <form role="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Tên Tài Liệu :</label>
+        <input type="text" value="" name="title" class="form-control" id="exampleInputEmail1" placeholder="Tên Môn Học ...">
+    </div>
+   
+    <div class="form-group">
+        <label for="exampleInputFile">File</label>
+       
+        <input type="file" name="filewd" id="exampleInputFile">
+        <!-- <img style="width: 150px;" src="../../public/images" alt=""> -->
+        
+    </div>
+    
+    <div>
+    <label for="email" class="form-label">Lựa Chọn Môn Học:</label>
+    <br>
+                            <select class="form-select" name="id_subject" size="3" aria-label="size 3 select example">
+                                <option selected>--Môn Học--</option>
+                                <?php 
+                                $sql="SELECT * FROM subject";
+                                $reslut= mysqli_query($con,$sql);
+                                while ($rows=mysqli_fetch_array($reslut)) { ?>
+                                  <option value="<?php echo $rows['id'];?>"><?php echo $rows['subject_name'];?></option>
+                                    
 
 
+                              <?php  }
+                                ?>
+                              
+                            </select>
+    </div>
+    <div>
+         <label for="exampleInputFile">Subject Conten :</label>
+       
+    </div>
+    <!-- <div class="checkbox">
+        <label>
+            <input type="checkbox"> Check me out
+        </label>
+    </div> -->
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+</div>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+</div>
+                    </section>
                 </div>
+            </div>
+        </div>
 		
 </section>
  <!-- footer -->
