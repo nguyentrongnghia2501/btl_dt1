@@ -108,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Quản Lý Sinh Viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="basic_table.html">Danh sách Sinh Viên</a></li>
+                        <li><a href="../students/index.php">Danh sách Sinh Viên</a></li>
                         <li><a href="responsive_table.html">Responsive Table</a></li>
                     </ul>
                 </li>

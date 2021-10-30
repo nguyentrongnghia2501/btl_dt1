@@ -1,7 +1,4 @@
-<?php 
-require_once("../../db/dbhepler.php");
-
-?>
+<!-- ccsas -->
 <!DOCTYPE html>
 <head>
 <title>admin</title>
@@ -27,7 +24,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="../../public/css/monthly.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 <script src="../../public/js/jquery2.0.3.min.js"></script>
 <script src="../../public/js/raphael-min.js"></script>
 <script src="../../public/js/morris.js"></script>
@@ -100,9 +96,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Môn Học</span>
                     </a>
                     <ul class="sub">
-						<li><a href="../subject/list_subject.php">Danh sách Môn Học </a></li>
-						<li><a href="../subject/add_subject.php">Thêm Môn Học Mới </a></li>
-                        <li><a href="../document/index.php">Tài Liệu</a></li>
+						<li><a href="list_subject.php">Danh sách Môn Học </a></li>
+						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
+                        
                     </ul>
                 </li>
                
@@ -122,8 +118,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Tài Liệu Môn Học </span>
                     </a>
                     <ul class="sub">
-                        <li><a href="index.php">Môn Học</a></li>
-                        <li><a href="add_document.php">Thêm tài liệu</a></li>
+                        <li><a href="../document/index.php">Tài Liệu</a></li>
+                        <li><a href="../document/add_document.php">Thêm tài liệu</a></li>
 					
                     </ul>
                 </li>
@@ -154,130 +150,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-	   <!-- trang chính -->  
-       <div class="table-agile-info">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-          Tài Liệu
-    </div>
-    <div class="row w3-res-tb">
-      <div class="col-sm-5 m-b-xs">
-       
-      
-        <select class="input-sm form-control w-sm inline v-middle">
-          <option value="0">Bulk action</option>
-          <option value="1">Delete selected</option>
-          <option value="2">Bulk edit</option>
-          <option value="3">Export</option>
-        </select>
-       
-        <button class="btn btn-sm btn-default">Apply</button>                
-      </div>
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-3"> 
-        <form action="index.php" method="get">
-        <div class="input-group">
-       
-           <input type="text" class="input-sm form-control" name="s" placeholder="Search">
-           <span class="input-group-btn">           
-         <input style="font-size: 15px;" type="submit" name="search" value="GO"> 
-         
-          </span> 
-       
-        </div> 
-      </form>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped b-t b-light">
-        <thead>
-          <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
-            <th>Tên Tài Liệu</th>
-            <th>File</th>
-            <th>Môn Học</th>
-            <th>Ngày tạo</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php 
-        if(isset($_GET['s']) && $_GET['s']!=''){
-         
-         
-         
-          // if($title_search=='')
-          // {
-          //   $_SESSION['warrning']='Bạn Chưa nhập thông tin !';
-          // }
-          $sql='select  document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-           from `document`left join subject on document.id_subject=subject.id where `title` like "%'.$_GET['s'].'%" ';
-          // $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-          // from document left join subject on document.id_subject=subject.id where `title` like "%'.$_GET["s"].'%"";
-             
-        }
-        else{
-           $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-          from document left join subject on document.id_subject=subject.id";
-        }
-        
+	  
 
-        
-     
-         $rs=mysqli_query($con,$sql); 
-         while ($row=mysqli_fetch_array($rs)) { ?>
-            
-               
- <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-            <td><?php echo $row['title'];?></td>
-            <td><?php echo $row['filewd'];?></td>
-            <td><?php echo $row['subject_subject_name'];?></td>
-            <td><?php echo $row['created_at'];?></td>
-            <td>
-           <a href="download.php?file=<?php echo $row['filewd'] ?>"><i class="fas fa-file-download"></i></a>
-            <a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-            <a href="add_document.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
-           <a href=""><i class="fa fa-info-circle"></i></a>
-            </td>
-          </tr>
-
-
-      <?php    }
-       
-       ?>
-         
-         
-        
-         
-        </tbody>
-      </table>
-    </div>
-    <footer class="panel-footer">
-      <div class="row">
-        
-        <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </div>
-</div>
+	   <!-- trang chính -->
 		
 </section>
  <!-- footer -->
