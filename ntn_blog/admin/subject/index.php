@@ -177,9 +177,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              
       
              <div class="gallery-top-grids">
-					<div class="col-sm-4 gallery-grids-left">
-						<div class="gallery-grid">
-							<a class="example-image-link" href="images/g5.jpg" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
+					<div class="col-sm-4 gallery-grids-left" >
+						<div class="gallery-grid" style="border: solid 1px black;">
+							<a class="example-image-link" href="add_subject.php" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
 								<img style="width: 400px;height: 300px;" src="../../public/images<?php echo $row['image'];?>" alt="" />
 								<div class="captn">
 									<h4>Visitors</h4>
