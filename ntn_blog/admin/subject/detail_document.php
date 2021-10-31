@@ -179,76 +179,88 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section id="main-content">
 	<section id="main" class="wrapper">
     <div class="table-agile-info">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Danh sách sinh viên
-                        </div>
-                        <div>
-                            <table class="table" ui-jq="footable" ui-options='{
-        "paging": {
-          "enabled": true
-        },
-        "filtering": {
-          "enabled": true
-        },
-        "sorting": {
-          "enabled": true
-        }}'>
-                                <thead>
-                                    <tr>
-                                        <th data-breakpoints="xs">STT</th>
-                                        <th>Họ Và Tên</th>
-                                        <th>Ảnh Đại Diện</th>
-                                        <th>Điểm</th>
-                                        <th>password</th>
-                                        <th>Môn Đang Theo Học Học</th>
-                                        <th>Gmail</th>
-                                        
-
-                                   
-                                    </tr>
-                                </thead>
-                                <tbody>
-	   <!-- trang chính -->  
-       <?php 
-         $sql="Select student.id,student.name_student,student.avatar,student.point,student.password,student.email,student.created_at,
-         student.updated_at, subject.subject_name subject_subject_name
-         from student left join subject on student.id_subject=subject.id where subject.id=".$id;
-        //  $sql ='select  product.id,product.title, product.price , product.thumbnail,product.updated_at,
-        //  category.name category_name from product left join category on product.id_category=category.id
-        //  where category.id='.$id;
-        $rs= mysqli_query($con,$sql);
-                                $index=1;
-                                while ($row=mysqli_fetch_array($rs)) { ?>
-                                    <tr>
-                                        <td><?php echo $index++ ?></td>
-                                        <td><?php echo $row['name_student'];?></td>
-                                        <img src="" alt="">
-                                        <td><img style="width: 100px;" src="../../public/images<?php echo $row['avatar'];?>" alt=""></td>
-                                        <td><?php echo $row['point'];?></td>
-                                        <td><?php echo $row['password'];?></td>
-                                        <td><?php echo $row['subject_subject_name'];?></td>
-                                        <td><?php echo $row['email'];?></td>
-                                      <th data-breakpoints="xs"><a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-                                       <a href="add_student.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
-                                      <a href=""><i class="fa fa-info-circle"></i></a>
-                                    </th>  
-                                       
-                                    </tr>
-                                    <?php } ?>
-     
+  <div class="panel panel-default">
+    <div class="panel-heading">
+          Tài Liệu
+          <a href="detail.php?id=<?php echo $id?>" style="float: left;"><i class="fa fa-group"></i></a>
+    </div>
+    <div class="row w3-res-tb">
+      <div class="col-sm-5 m-b-xs">
+       
       
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-		
+       
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+          <tr>
+            <th style="width:20px;">
+              <label class="i-checks m-b-none">
+                <input type="checkbox"><i></i>
+              </label>
+            </th>
+            <th>Tên Tài Liệu</th>
+            <th>File</th>
+            <th>Môn Học</th>
+            <th>Ngày tạo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php 
     
+           $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+          from document left join subject on document.id_subject=subject.id where subject.id=".$id;
+         $rs=mysqli_query($con,$sql); 
+         while ($row=mysqli_fetch_array($rs)) { ?>
+            
+               
+ <tr>
+            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td><?php echo $row['title'];?></td>
+            <td><?php echo $row['filewd'];?></td>
+            <td><?php echo $row['subject_subject_name'];?></td>
+            <td><?php echo $row['created_at'];?></td>
+            <td>
+            <a href="../document/download.php?file=<?php echo $row['filewd'] ?>"><i class="fas fa-file-download"></i></a>
+            <a href="../document/delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
+            <a href="../document/add_document.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
+           <a href=""><i class="fa fa-info-circle"></i></a>
+            </td>
+          </tr>
 
 
-
-		
+      <?php    }
+       
+       ?>
+         
+         
+        
+         
+        </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        
+        <div class="col-sm-5 text-center">
+          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+        </div>
+        <div class="col-sm-7 text-right text-center-xs">                
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
 </section>
  <!-- footer -->
 		  <div class="footer">
