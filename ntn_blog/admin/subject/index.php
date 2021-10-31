@@ -167,7 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section id="main-content">
 	<section id="main" class="wrapper">
 	 
-   <ul style="height: 15rem;background-color: red;">
+  
       
 	   <!-- trang chính -->      
        <?php 
@@ -175,23 +175,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           $rs=mysqli_query($con,$sql);
         while($row=mysqli_fetch_array($rs)){ ?>
              
-<!-- <div class="card" style="width: 18rem;">
-  <img style="width: 150px;" src="" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><?php echo $row['subject_name'];?></h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-</div> -->
-
-         <li><img style="width: 150px; height: 150px;" src="../../public/images<?php echo $row['image'];?>" alt=""></li>
+      
+             <div class="gallery-top-grids">
+					<div class="col-sm-4 gallery-grids-left">
+						<div class="gallery-grid">
+							<a class="example-image-link" href="images/g5.jpg" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
+								<img style="width: 400px;height: 300px;" src="../../public/images<?php echo $row['image'];?>" alt="" />
+								<div class="captn">
+									<h4>Visitors</h4>
+									<p>Aliquam non</p>
+								</div>
+							</a>
+						</div>
+					</div>
+         
          
     <?php    }
       
       ?>
       
-      </ul>
+    
 
 
 
