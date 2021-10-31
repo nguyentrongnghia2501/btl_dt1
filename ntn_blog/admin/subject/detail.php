@@ -2,6 +2,18 @@
 require_once("../../db/dbhepler.php");
 
 ?>
+<?php
+             if(isset($_GET['id']))
+             {
+                 $id=$_GET['id'];
+                 $sql= "SELECT * FROM subject WHERE id=$id";
+                $subject= executeSingleResult($sql);
+                if($subject != null){
+                    $subject_name =$subject['subject_name'];
+                }
+            }
+           
+           ?>  
 <!-- ccsas -->
 <!DOCTYPE html>
 <head>
@@ -166,34 +178,74 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content start-->
 <section id="main-content">
 	<section id="main" class="wrapper">
-	 
-  
-      
-	   <!-- trang chính -->      
+    <div class="table-agile-info">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Danh sách sinh viên
+                            <a href="detail_document.php?id=<?php echo $id?>" style="float: left;"><i class="fa fa-file-text"></i></a>
+                        </div>
+                        
+                        <div>
+                            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                <thead>
+                                    <tr>
+                                        <th data-breakpoints="xs">STT</th>
+                                        <th>Họ Và Tên</th>
+                                        <th>Ảnh Đại Diện</th>
+                                        <th>Điểm</th>
+                                        <th>password</th>
+                                        <th>Môn Đang Theo Học Học</th>
+                                        <th>Gmail</th>
+                                        
+
+                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+	   <!-- trang chính -->  
        <?php 
-          $sql="SELECT * FROM subject";
-          $rs=mysqli_query($con,$sql);
-        while($row=mysqli_fetch_array($rs)){ ?>
-             
+         $sql="Select student.id,student.name_student,student.avatar,student.point,student.password,student.email,student.created_at,
+         student.updated_at, subject.subject_name subject_subject_name
+         from student left join subject on student.id_subject=subject.id where subject.id=".$id;
+        //  $sql ='select  product.id,product.title, product.price , product.thumbnail,product.updated_at,
+        //  category.name category_name from product left join category on product.id_category=category.id
+        //  where category.id='.$id;
+        $rs= mysqli_query($con,$sql);
+                                $index=1;
+                                while ($row=mysqli_fetch_array($rs)) { ?>
+                                    <tr>
+                                        <td><?php echo $index++ ?></td>
+                                        <td><?php echo $row['name_student'];?></td>
+                                        <img src="" alt="">
+                                        <td><img style="width: 100px;" src="../../public/images<?php echo $row['avatar'];?>" alt=""></td>
+                                        <td><?php echo $row['point'];?></td>
+                                        <td><?php echo $row['password'];?></td>
+                                        <td><?php echo $row['subject_subject_name'];?></td>
+                                        <td><?php echo $row['email'];?></td>
+                                      <th data-breakpoints="xs"><a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
+                                       <a href="add_student.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
+                                      <a href=""><i class="fa fa-info-circle"></i></a>
+                                    </th>  
+                                       
+                                    </tr>
+                                    <?php } ?>
+     
       
-             <div class="gallery-top-grids">
-					<div class="col-sm-4 gallery-grids-left" >
-						<div class="gallery-grid" style="border: solid 1px black;">
-							<a class="example-image-link" href="detail.php?id=<?php echo $row['id'];?>" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
-								<img style="width: 400px;height: 300px;" src="../../public/images<?php echo $row['image'];?>" alt="" />
-								<div class="captn">
-									<h4>Visitors</h4>
-									<p>Aliquam non</p>
-								</div>
-							</a>
-						</div>
-					</div>
-         
-         
-    <?php    }
-      
-      ?>
-      
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+		
     
 
 
