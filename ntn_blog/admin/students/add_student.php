@@ -42,8 +42,8 @@ if (!empty($_POST)) {
 		$created_at = $updated_at = date('Y-m-d H:s:i');
         if($id)
         {
-           $sql="UPDATE `document` SET `title`='$title',`filewd`='$filewd',
-           `id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
+           $sql="UPDATE `student` SET `name_student`='$name',`avatar`='$anh',`point`='$point',
+           `password`='$pass',`email`='$email',`id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
         }
 		else{
             $sql="INSERT INTO `student`(`name_student`, `avatar`, `point`, `password`, `email`, `id_subject`, `created_at`, `updated_at`) 

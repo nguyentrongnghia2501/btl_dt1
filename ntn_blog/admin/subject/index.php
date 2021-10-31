@@ -1,3 +1,7 @@
+<?php 
+require_once("../../db/dbhepler.php");
+
+?>
 <!-- ccsas -->
 <!DOCTYPE html>
 <head>
@@ -97,8 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
 						<li><a href="list_subject.php">Danh sách Môn Học </a></li>
-						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
-                        
+						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>                       
                     </ul>
                 </li>
                
@@ -150,9 +153,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-	  
+	 
 
-	   <!-- trang chính -->
+	   <!-- trang chính -->      
+       <?php 
+          $sql="SELECT * FROM subject";
+          $rs=mysqli_query($con,$sql);
+        while($row=mysqli_fetch_array($rs)){ ?>
+             <div>
+<div class="card" style="width: 18rem;">
+  <img style="width: 100px;" src="../../public/images<?php echo $row['image'];?>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $row['subject_name'];?></h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
+
+            
+    <?php    }
+      
+      ?>
+
+
+
 		
 </section>
  <!-- footer -->
