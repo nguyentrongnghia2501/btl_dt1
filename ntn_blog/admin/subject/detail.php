@@ -231,10 +231,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <td><?php echo $row['password'];?></td>
                                         <td><?php echo $row['subject_subject_name'];?></td>
                                         <td><?php echo $row['email'];?></td>
-                                      <th data-breakpoints="xs"><a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-                                       <a href="add_student.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
-                                      <a href=""><i class="fa fa-info-circle"></i></a>
-                                    </th>  
+                                     
+                                  
                                        
                                     </tr>
                                     <?php } ?>
