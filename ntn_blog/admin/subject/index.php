@@ -65,11 +65,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        
     <li id="header_notification_bar" class="dropdown">
         <!--  Thoong bao  -->
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+           
 
-                <i class="fa fa-bell-o"></i>
+              <a href="add_noti.php"><i class="fa fa-bell-o"></i></a>  
                 <span class="badge bg-warning">3</span>
-            </a>
+            
             </li>
         <!-- notification dropdown end -->
     </ul>
