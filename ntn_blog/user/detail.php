@@ -1,5 +1,22 @@
 <?php 
 require_once("../db/dbhepler.php");
+
+?>
+<?php
+             if(isset($_GET['id']))
+             {
+                 $id=$_GET['id'];
+                 $sql= "SELECT * FROM subject WHERE id=$id";
+                $subject= executeSingleResult($sql);
+                if($subject != null){
+                    $subject_name =$subject['subject_name'];
+                }
+            }
+           
+           ?>  
+
+<?php 
+require_once("../db/dbhepler.php");
 $sql= "SELECT * FROM notification WHERE statust=0";
 $rs= mysqli_query($con,$sql);
 $cout= mysqli_num_rows($rs);
@@ -192,39 +209,92 @@ $cout= mysqli_num_rows($rs);
     </div>
     </div>
     <!--  giới thiệu -->
-    <div class="container">
-         <div class="row" style="padding: 35px;">
-           <div class="col-md-6">
-          <p style="font-size: 50px; color: cyan;"> Về tnt coder</p>
-                 <p> tnt coder là nơi chia sẻ kinh nghiệm giúp có những ai muốn phát triển sự nghiệp theo nghề lập trình web có một lộ trình cụ thể để có công việc thu nhập từ 8-30tr/tháng. Bắt đầu hoạt động 10/2021 đến nay đã có trên 2.500 học viên tin tưởng theo học và đã đi làm tốt. Bây giờ đến lượt bạn!</p>
-                  
-           </div>
-           <div class="col-md-6">
-              <img style="width: 600px;height: 300px;" src="../public/images/gioithieunt.jpg" alt="">
-           </div>
-         </div>
-         <hr style="text-shadow: 1px 1px 2px black, 0px 0px 30px #c4ef26;">
+    <section id="main-content">
+	<section id="main" class="wrapper">
+    <div class="table-agile-info">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          
+                        </div>
+                        
+                        <div>
+                            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                <thead>
+                                    <tr>
+                                        <th data-breakpoints="xs">STT</th>
+                                        <th>Họ Và Tên</th>
+                                        <th>Ảnh Đại Diện</th>
+                                        <th>Điểm</th>
+                                       
+                                        <th>Môn Đang Theo Học Học</th>
+                                        <th>Gmail</th>
+                                        
+
+                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+	   <!-- trang chính -->  
+       <?php 
+         $sql="Select student.id,student.name_student,student.avatar,student.point,student.password,student.email,student.created_at,
+         student.updated_at, subject.subject_name subject_subject_name
+         from student left join subject on student.id_subject=subject.id where subject.id=".$id;
+        //  $sql ='select  product.id,product.title, product.price , product.thumbnail,product.updated_at,
+        //  category.name category_name from product left join category on product.id_category=category.id
+        //  where category.id='.$id;
+        $rs= mysqli_query($con,$sql);
+                                $index=1;
+                                while ($row=mysqli_fetch_array($rs)) { ?>
+                                    <tr>
+                                        <td><?php echo $index++ ?></td>
+                                        <td><?php echo $row['name_student'];?></td>
+                                        <img src="" alt="">
+                                        <td><img style="width: 100px;" src="../public/images<?php echo $row['avatar'];?>" alt=""></td>
+                                        <td><?php echo $row['point'];?></td>
+                                       
+                                        <td><?php echo $row['subject_subject_name'];?></td>
+                                        <td><?php echo $row['email'];?></td>
+                                     
+                                  
+                                       
+                                    </tr>
+                                    <?php } ?>
      
-    </div>
-    <!-- x -->
-    <div class="container-fulid">
+      
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+		
+    
+
+
+
+		
+</section>
+<section>
+
+<div class="container-fulid">
         <div id="warperx">
-          <h1 style="text-align: center;">Các Môn Học</h1>
+          <h1 style="text-align: center;">Tài Liệu Môn Học</h1>
             <ul class="products">
                 <?php 
-              $limit=8; // số sản phẩm trong 1 trang
-              $page =1;// trang bắt đầu =1 
-              if(isset($_GET['page'])){
-                  $page=$_GET['page'];
-              }
-              $fristIndex=($page-1)*$limit;
-              // xác định trang cần lấy sản phẩm
-              $sql ="SELECT * FROM subject WHERE 1 LIMIT ".$fristIndex." ,".$limit;
+            
+              
+           $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
+           from document left join subject on document.id_subject=subject.id where subject.id=$id ";
               $rx=mysqli_query($con,$sql);
-              $sql="SELECT count(id) as total FROM subject "; // dùng để đếnm
-              $countResult = executeSingleResult($sql);
-              $count = $countResult['total'];
-              $number= ceil($count/$limit) ; //ceil là hàm làm tròn trên
+            
           
               while($row=mysqli_fetch_array($rx)){ ?>
 
@@ -232,13 +302,13 @@ $cout= mysqli_num_rows($rs);
                     <div class="product-item">
                         <div class="product_top">
                             <a href="" class="thumbnail">
-                                <img style="height: 250px;width: 400px;" src="../public/images<?php echo $row['image'];?>" alt="">
+                                <img style="height: 250px;width: 400px;" src="../public/images/word.png" alt="">
                             </a>
-                            <a href="detail.php?id=<?php echo $row['id'];?>" class="buy_now">Chi Tiết</a>
+                            <a href="../admin/document/download.php?file=<?php echo $row['filewd']?>" class="buy_now">Download</a>
                             <!-- mua ngay -->
                         </div>
-                        <div class="product-info">
-                         <p style="text-align: center;color: #ca777f;"><?php echo $row['subject_name'];?></p> 
+                        <div class="product-info">  <a href=""></a>
+                         <p style="text-align: center;color: #ca777f;"><?php echo $row['title'];?>  
                         
                         </div>
                     </div>
@@ -249,45 +319,26 @@ $cout= mysqli_num_rows($rs);
           </ul>
 
         </div>
-        <ul class="pagination" style="padding-left: 45%;">
-                    <?php
-                      if($page>1){
-                          echo'
-                          <li class="page-item"><a class="page-link" href="?page='.($page-1).'"><i class="fas fa-angle-double-left"></i></a></li>
-                          ';
-                      }
-                     
-                    ?>
-
-                    <?php
-                    for ($i=0; $i <$number; $i++) { 
-                        if($page==$i+1){
-                            echo '
-                            <li class="page-item active" ><a style="background-color: #000;color: #fff;"" class="page-link" href="#">'.($i+1).'</a></li>
-                           ';
-                        }
-                        else{
-                              echo '
-                         <li class="page-item" ><a style="background-color: #000;color: #fff;"" class="page-link" href="?page='.($i+1).'">'.($i+1).'</a></li>
-                        ';
-                        }
-                     
-                       
-                    }
-                    ?>
-                    <!-- sử lý next -->
-                    <a href="" style="color: #fff;"></a>
-                    <?php
-                      if($page<($number)){
-                          echo'
-                          <li class="page-item" ><a  style="background-color: #000;color: #fff;"" class="page-link" href="?page='.($page+1).'"><i class="fas fa-angle-double-right"></i></a></li>
-                          ';
-                      }
-                     
-                    ?>
-
-                </ul>
+       
     </div>
+
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3>Comment!</h3>
+            <form action="post">
+                <section>
+            <textarea name="coment" style="width: 100%;" id="" cols="30" rows="10" placeholder="Viết vào đây ..."></textarea>
+        </section>
+        <section><input type="submit" value="Bình luận"></section>
+            </form>
+        
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
     <!-- scrip -->
     <script src="https://code.jquery.com/jquery-3.6.0.js">
     </script>
