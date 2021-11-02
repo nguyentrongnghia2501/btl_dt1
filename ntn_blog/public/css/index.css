@@ -48,7 +48,7 @@
             }
             
             ul#main_menu {
-                float: left;
+                display: flex;
             }
             
             ul#main_menu a {
@@ -79,8 +79,4 @@
                 font-family: 'Orbitron', sans-serif;
                 color: #c3f021;
                 text-shadow: 1px 1px 2px black, 0px 0px 30px #c4ef26;
-            }
-            
-            #navbarSupportedContent ul li>.dropdown-menu {
-                display: none;
             }
