@@ -1,3 +1,9 @@
+<?php 
+require_once("../db/dbhepler.php");
+$sql= "SELECT * FROM notification WHERE statust=0";
+$rs= mysqli_query($con,$sql);
+$cout= mysqli_num_rows($rs);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,27 +48,31 @@
 
                 <nav>
                     <ul id="main_menu">
-                        <li><a href="#">Trang Chủ</a></li>
+                        <li><a href="#">Trang Chủ <i class="fas fa-home"></i></a></li>
                         
                           <!-- Thông Báo  -->
 <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Thông Báo <i class="far fa-bell"> <span class="badge bg-danger">4</span></i>
+                                Thông Báo <i class="far fa-bell"> <span class="badge bg-danger"><?php echo $cout; ?></span></i>
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
+                                <?php 
+                                
+                                $sqx="SELECT * FROM notification WHERE statust=0";
+                                $nt= mysqli_query($con,$sqx);
+                                while($rows=mysqli_fetch_array($nt))
+                                {  ?>
+                                         <li><a class="dropdown-item" href="#"><?php echo $rows['noti_name'];?></a></li>
+                                <?php }
+                                ?>
+                               
+                               
                             </ul>
                         </li>
                           
                         <li><a href="#">Xem Điểm</a></li>
-                        <li><a href="#">Môn Học</a></li>
+                        <li><a href="#">Môn Học <i class="fas fa-code"></i></a></li>
                        
                         </li>
                         <li class="nav-item dropdown">
@@ -71,13 +81,19 @@
                                 <img src="../public/images/g2.jpg" alt="Avatar Logo" style="width:40px;"
                                         class="rounded-pill">
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown" >
 
-                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Đổi Mật Khẩu</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                               
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
+                        </li>
+                        <li style="padding-top: 5px;">
+                        <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
+    </form>
                         </li>
                       
                     </ul>
@@ -100,22 +116,102 @@
 
     </div>
     <!-- x -->
-    <div id="conten" class="container">
-
-    </div>
-    <!-- x -->
-    <div class="container"></div>
-    <!-- container search -->
-    <div class="container-fulid">
-        <div class="row">
-            <div class="col-md-4" style="background-color: #fff;">x</div>
-            <div class="col-md-4" style="background-color: red;font-family:  'Ubuntu', sans-serif;">
-
-            </div>
-            <div class="col-md-4" style="background-color: yellow;"></div>
-
-        </div>
-    </div>
+    <div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
     <!-- scrip -->
     <script src="https://code.jquery.com/jquery-3.6.0.js">
     </script>
