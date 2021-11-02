@@ -140,7 +140,7 @@ $cout= mysqli_num_rows($rs);
 
                 <nav>
                     <ul id="main_menu">
-                        <li><a href="#">Trang Chủ <i class="fas fa-home"></i></a></li>
+                        <li><a href="index.php">Trang Chủ <i class="fas fa-home"></i></a></li>
 
                         <!-- Thông Báo  -->
                         <li class="nav-item dropdown">
@@ -164,7 +164,7 @@ $cout= mysqli_num_rows($rs);
                             </ul>
                         </li>
 
-                        <li><a href="#">Xem Điểm</a></li>
+                       
                         <li><a href="#">Môn Học <i class="fas fa-code"></i></a></li>
 
                         </li>
@@ -324,6 +324,13 @@ $cout= mysqli_num_rows($rs);
 
 </section>
 <div class="container">
+    <?php 
+       if(isset($_POST['submit']))
+       {
+           
+       }
+    
+    ?>
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -332,7 +339,7 @@ $cout= mysqli_num_rows($rs);
                 <section>
             <textarea name="coment" style="width: 100%;" id="" cols="30" rows="10" placeholder="Viết vào đây ..."></textarea>
         </section>
-        <section><input type="submit" value="Bình luận"></section>
+        <section><input type="submit" value="Bình luận" name="submit"></section>
             </form>
         
         </div>

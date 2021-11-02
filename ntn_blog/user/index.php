@@ -123,7 +123,7 @@ $cout= mysqli_num_rows($rs);
 
                 <nav>
                     <ul id="main_menu">
-                        <li><a href="#">Trang Chủ <i class="fas fa-home"></i></a></li>
+                        <li><a href="index.php">Trang Chủ <i class="fas fa-home"></i></a></li>
 
                         <!-- Thông Báo  -->
                         <li class="nav-item dropdown">
@@ -147,8 +147,8 @@ $cout= mysqli_num_rows($rs);
                             </ul>
                         </li>
 
-                        <li><a href="#">Xem Điểm</a></li>
-                        <li><a href="#">Môn Học <i class="fas fa-code"></i></a></li>
+                      
+                        <li><a href="#warperx">Môn Học <i class="fas fa-code"></i></a></li>
 
                         </li>
                         <li class="nav-item dropdown">
@@ -160,9 +160,9 @@ $cout= mysqli_num_rows($rs);
                             <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
 
                                 <li><a class="dropdown-item" href="#">Đổi Mật Khẩu</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng Xuất</a></li>
 
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                
                             </ul>
                         </li>
                         <li style="padding-top: 5px;">
