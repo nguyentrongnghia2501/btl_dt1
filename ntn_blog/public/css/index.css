@@ -20,6 +20,7 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 background-color: #000;
                 color: #fff;
+                z-index: 99999;
             }
             
             #logo {
@@ -69,6 +70,7 @@
                 background: rgb(43, 42, 42);
                 opacity: 0.9;
                 color: #000;
+                z-index: 999999;
             }
             
             header.sticky #main_menu a {
@@ -79,82 +81,4 @@
                 font-family: 'Orbitron', sans-serif;
                 color: #c3f021;
                 text-shadow: 1px 1px 2px black, 0px 0px 30px #c4ef26;
-            }
-            
-            #warperx {
-                max-width: 1170px;
-                margin: 0px auto;
-            }
-            
-            ul.products {
-                display: flex;
-                flex-wrap: wrap;
-                /* dùng để xuống hàng */
-                justify-content: space-between;
-                /* dàn đều */
-                list-style: none;
-            }
-            
-            ul.products li .product_top .thumbnail {
-                display: block;
-            }
-            
-            ul.products li .product_top {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            ul.products li:hover .product_top .thumbnail {
-                transform: scale(1.5);
-                transition: 5s;
-            }
-            
-            ul.products li .product_top .thumbnail img {
-                /* border: 1px solid black; */
-                display: block;
-            }
-            
-            ul.products li .product_top a.buy_now {
-                text-transform: uppercase;
-                text-decoration: none;
-                text-align: center;
-                display: block;
-                background-color: red;
-                color: #fff;
-                padding: 10px 0px;
-                position: absolute;
-                width: 100%;
-                bottom: -45px;
-                transition: 0.25s ease-in-out;
-                opacity: 0.85;
-            }
-            
-            ul.products li :hover a.buy_now {
-                bottom: 0px;
-            }
-            
-            ul.products li {
-                flex-basis: 30%;
-                padding-left: 5px;
-                padding-right: 5px;
-                box-sizing: border-box;
-                margin-bottom: 20px;
-            }
-            
-            ul.products li img {
-                width: 200px;
-                height: 150px;
-            }
-            
-            #top_main h1 {
-                text-shadow: 3px 1px 5px black, 0px 0px 30px #3f0ba0;
-            }
-            
-            #top_main hr {
-                color: blue;
-                width: 12rem;
-                height: 2px;
-                margin-left: 36%;
-                margin-top: -0.5rem;
-                text-shadow: 1px 1px 2px black, 0px 0px 30px #b2e01c;
             }
