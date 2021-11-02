@@ -177,29 +177,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
       
 	   <!-- trang chính -->      
-       <?php 
-          $sql="SELECT * FROM subject";
-          $rs=mysqli_query($con,$sql);
-        while($row=mysqli_fetch_array($rs)){ ?>
-             
       
-             <div class="gallery-top-grids">
-					<div class="col-sm-4 gallery-grids-left" >
-						<div class="gallery-grid" style="border: solid 1px black;">
-							<a class="example-image-link" href="detail.php?id=<?php echo $row['id'];?>" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
-								<img style="width: 400px;height: 300px;" src="../../public/images<?php echo $row['image'];?>" alt="" />
-								<div class="captn">
-									<h4>Visitors</h4>
-									<p>Aliquam non</p>
-								</div>
-							</a>
-						</div>
-					</div>
-         
-         
-    <?php    }
       
-      ?>
       
     
 
