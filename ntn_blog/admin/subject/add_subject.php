@@ -216,7 +216,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <section class="wrapper">
                <!-- trang chính -->
                <div class="form-w3layouts">
-        <!-- page start-->
+        <!-- page áuodf-->
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">

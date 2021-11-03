@@ -1,6 +1,6 @@
 <?php 
 require_once("../../db/dbhepler.php");
-
+//a
 ?>
 <!DOCTYPE html>
 <head>
@@ -348,6 +348,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			pointSize: 2,
 			hideHover: 'auto',
 			resize: true
+      
 		});
 		
 	   
