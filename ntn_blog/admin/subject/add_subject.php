@@ -249,7 +249,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <input type="checkbox"> Check me out
                                     </label>
                                 </div> -->
-                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button type="submit" class="btn btn-info">Thêm Môn Học</button>
                             </form>
                             </div>
 
