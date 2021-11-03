@@ -1,10 +1,80 @@
 <?php 
 require_once("../../db/dbhepler.php");
-//a
+
+
+?>
+<?php 
+$id = $name = $anh  =$pass=$point= $id_subject=$email = '';
+if (!empty($_POST)) {
+	if (isset($_POST['name'])) {
+		$name = $_POST['name'];
+		$name = str_replace('"', '\\"', $name);
+	}
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+	
+	if (isset($_FILES['avatar'])) {
+        $anh=$_FILES['avatar']['name'];
+
+	}
+    if (isset($_POST['pass'])) {
+        $pass=$_POST['pass'];
+        $pass = str_replace('"', '\\"', $pass);
+	}
+    if (isset($_POST['point'])) {
+        $point=$_POST['point'];
+        $point = str_replace('"', '\\"', $point);
+	}
+    if (isset($_POST['email'])) {
+        $email=$_POST['email'];
+        $email = str_replace('"', '\\"', $email);
+	}
+	if (isset($_POST['id_subject'])) {
+		$id_subject = $_POST['id_subject'];
+	}
+    
+	if (!empty($name)) {
+        $tmp_name=$_FILES['avatar']['tmp_name'];
+        $anh=$_FILES['avatar']['name'];
+        move_uploaded_file($tmp_name,"../../public/images".$anh);
+        
+		$created_at = $updated_at = date('Y-m-d H:s:i');
+        if($id)
+        {
+           $sql="UPDATE `student` SET `name_student`='$name',`avatar`='$anh',`point`='$point',
+           `password`='$pass',`email`='$email',`id_subject`='$id_subject',`created_at`='$created_at',`updated_at`='$updated_at' WHERE id=$id";
+        }
+		else{
+            $sql="INSERT INTO `student`(`name_student`, `avatar`, `point`, `password`, `email`, `id_subject`, `created_at`, `updated_at`) 
+            VALUES ('$name','$anh','$point','$pass','$email','$id_subject','$created_at','$updated_at')";
+        }
+
+		executex($sql);
+
+		header('Location: index.php');
+		die();
+	}
+}
+if (isset($_GET['id'])) {
+    $id=$_GET['id'];
+    $sql= "SELECT * FROM student WHERE id=$id";
+    $student=executeSingleResult($sql);
+    if ($student != null) {
+       $name=$student['name_student'];
+       $anh=$student['avatar'];
+       $point=$student['point'];
+       $pass=$student['password'];
+       $email=$student['email'];
+       $id_subject=$student['id_subject'];
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <head>
-<title>admin</title>
+<title>add_studet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -27,7 +97,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="../../public/css/monthly.css">
 <!-- //calendar -->
 <!-- //font-awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 <script src="../../public/js/jquery2.0.3.min.js"></script>
 <script src="../../public/js/raphael-min.js"></script>
 <script src="../../public/js/morris.js"></script>
@@ -88,7 +157,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="../subject/index.php">
+                    <a class="active" href="index.php">
                         <i class="fa fa-dashboard"></i>
                         <span>Bảng Điều Kiển</span>
                     </a>
@@ -112,8 +181,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Quản Lý Sinh Viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="basic_table.html">Danh sách Sinh Viên</a></li>
-                        <li><a href="responsive_table.html">Responsive Table</a></li>
+
+                        <li><a href="index.php">Danh sách Sinh Viên</a></li>
+                        <li><a href="#ml">Thêm Sinh viên</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -123,11 +193,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
                         <li><a href="index.php">Môn Học</a></li>
-                        <li><a href="add_document.php">Thêm tài liệu</a></li>
-					
+                        <li><a href="#">Thêm tài liệu</a></li>
+						<li><a href="dropzone.html">Dropzone</a></li>
                     </ul>
                 </li>
-                
+               
                
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -154,130 +224,87 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-	   <!-- trang chính -->  
-       <div class="table-agile-info">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-          Tài Liệu
-    </div>
-    <div class="row w3-res-tb">
-      <div class="col-sm-5 m-b-xs">
-       
-      
-        <select class="input-sm form-control w-sm inline v-middle">
-          <option value="0">Bulk action</option>
-          <option value="1">Delete selected</option>
-          <option value="2">Bulk edit</option>
-          <option value="3">Export</option>
-        </select>
-       
-        <button class="btn btn-sm btn-default">Apply</button>                
-      </div>
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-3"> 
-        <form action="index.php" method="get">
-        <div class="input-group">
-       
-           <input type="text" class="input-sm form-control" name="s" placeholder="Search">
-           <span class="input-group-btn">           
-         <input style="font-size: 15px;" type="submit" name="search" value="GO"> 
-         
-          </span> 
-       
-        </div> 
-      </form>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped b-t b-light">
-        <thead>
-          <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
-            <th>Tên Tài Liệu</th>
-            <th>File</th>
-            <th>Môn Học</th>
-            <th>Ngày tạo</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php 
-        if(isset($_GET['s']) && $_GET['s']!=''){
-         
-         
-         
-          // if($title_search=='')
-          // {
-          //   $_SESSION['warrning']='Bạn Chưa nhập thông tin !';
-          // }
-          $sql='select  document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-           from `document`left join subject on document.id_subject=subject.id where `title` like "%'.$_GET['s'].'%" ';
-          // $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-          // from document left join subject on document.id_subject=subject.id where `title` like "%'.$_GET["s"].'%"";
-             
-        }
-        else{
-           $sql="Select document.id,document.title,document.filewd,document.created_at,document.updated_at, subject.subject_name subject_subject_name
-          from document left join subject on document.id_subject=subject.id";
-        }
-        
+	  
 
+	   <!-- trang chính -->
+       <div class="form-w3layouts">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Sinh Viên
+                            <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                               
+                             </span>
+                        </header>
+                        <div class="panel-body">
+
+<div class="position-center">
+    <form role="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Tên sinh viên</label>
+        <input type="text" value="<?=$name?>" name="name" class="form-control" id="exampleInputEmail1" placeholder="Tên Môn Học ...">
+    </div>
+  
+   
+    <div class="form-group">
+        <label for="exampleInputFile">Ảnh đại diện</label>
+       
+        <input type="file" name="avatar" id="exampleInputFile">
+        <img style="width: 150px;" src="../../public/images<?=$anh?>" alt="">
         
-     
-         $rs=mysqli_query($con,$sql); 
-         while ($row=mysqli_fetch_array($rs)) { ?>
-            
-               
- <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-            <td><?php echo $row['title'];?></td>
-            <td><?php echo $row['filewd'];?></td>
-            <td><?php echo $row['subject_subject_name'];?></td>
-            <td><?php echo $row['created_at'];?></td>
-            <td>
-           <a href="download.php?file=<?php echo $row['filewd'] ?>"><i class="fas fa-file-download"></i></a>
-            <a href="delete.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash-o"></i></a>
-            <a href="add_document.php?id=<?php echo $row['id'];?>"><i class="fa fa-pencil-square-o"></i></a>
-           <a href=""><i class="fa fa-info-circle"></i></a>
-            </td>
-          </tr>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Điểm</label>
+        <input type="number" value="<?=$point?>" name="point" class="form-control" id="exampleInputEmail1" placeholder="Điểm số ...">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">password</label>
+        <input type="password" value="<?=$pass?>" name="pass" class="form-control" id="exampleInputEmail1" placeholder="password ...">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">email</label>
+        <input type="email" value="<?=$email?>" name="email" class="form-control" id="exampleInputEmail1" placeholder="gmail ...">
+    </div>
+    
+    <div>
+    <label for="email" class="form-label"> Môn Học Đang Học:</label>
+    <br>
+                            <select class="form-select" name="id_subject" size="3" aria-label="size 3 select example">
+                                <option selected>--Môn Học--</option>
+                                <?php 
+                                $sql="SELECT * FROM subject";
+                                $reslut= mysqli_query($con,$sql);
+                                while ($rows=mysqli_fetch_array($reslut)) { ?>
+                                  <option value="<?php echo $rows['id'];?>"><?php echo $rows['subject_name'];?></option>
+                                    
 
 
-      <?php    }
-       
-       ?>
-         
-         
-        
-         
-        </tbody>
-      </table>
+                              <?php  }
+                                ?>
+                              
+                            </select>
     </div>
-    <footer class="panel-footer">
-      <div class="row">
-        
-        <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </div>
+    <div>
+         <label for="exampleInputFile">Subject Conten :</label>
+       
+    </div>
+    <!-- <div class="checkbox">
+        <label>
+            <input type="checkbox"> Check me out
+        </label>
+    </div> -->
+    <button type="submit" class="btn btn-info">Add</button>
+</form>
 </div>
+
+</div>
+                    </section>
+                </div>
+            </div>
+        </div>
 		
 </section>
  <!-- footer -->
@@ -348,7 +375,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			pointSize: 2,
 			hideHover: 'auto',
 			resize: true
-      
 		});
 		
 	   

@@ -1,3 +1,7 @@
+<?php 
+require_once("../../db/dbhepler.php");
+
+?>
 <!-- ccsas -->
 <!DOCTYPE html>
 <head>
@@ -27,6 +31,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="../../public/js/jquery2.0.3.min.js"></script>
 <script src="../../public/js/raphael-min.js"></script>
 <script src="../../public/js/morris.js"></script>
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+    #main ul li{
+      list-style-type: none;
+      float: left;
+      padding: 10px;
+
+    }
+
+</style>
 </head>
 <body>
 <section id="container">
@@ -46,7 +63,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--  notification start -->
     <ul class="nav top-menu">
        
-       
+    <li id="header_notification_bar" class="dropdown">
+        <!--  Thoong bao  -->
+           
+
+              <a href="add_noti.php"><i class="fa fa-bell-o"></i></a>  
+                <span class="badge bg-warning">3</span>
+            
+            </li>
         <!-- notification dropdown end -->
     </ul>
     <!--  notification end -->
@@ -97,8 +121,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
 						<li><a href="list_subject.php">Danh sách Môn Học </a></li>
-						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>
-                        
+						<li><a href="add_subject.php">Thêm Môn Học Mới </a></li>                       
                     </ul>
                 </li>
                
@@ -108,8 +131,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Quản Lý Sinh Viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="basic_table.html">Danh sách Sinh Viên</a></li>
-                        <li><a href="responsive_table.html">Responsive Table</a></li>
+                        <li><a href="../students/index.php">Danh sách Sinh Viên</a></li>
+                        <li><a href="../students/add_student.php">Thêm Sinh Viên</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -149,10 +172,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--sidebar end-->
 <!--main content start-->
 <section id="main-content">
-	<section class="wrapper">
-	  
+	<section id="main" class="wrapper">
+	 
+  
+      
+	   <!-- trang chính -->      
+       <?php 
+          $sql="SELECT * FROM subject";
+          $rs=mysqli_query($con,$sql);
+        while($row=mysqli_fetch_array($rs)){ ?>
+             
+      
+             <div class="gallery-top-grids">
+					<div class="col-sm-4 gallery-grids-left" >
+						<div class="gallery-grid" style="border: solid 1px black;">
+							<a class="example-image-link" href="detail.php?id=<?php echo $row['id'];?>" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
+								<img style="width: 400px;height: 300px;" src="../../public/images<?php echo $row['image'];?>" alt="" />
+								<div class="captn">
+									<h4>Visitors</h4>
+									<p>Aliquam non</p>
+								</div>
+							</a>
+						</div>
+					</div>
+         
+         
+    <?php    }
+      
+      ?>
+      
+    
 
-	   <!-- trang chính -->
+
+
 		
 </section>
  <!-- footer -->

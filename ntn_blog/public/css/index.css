@@ -1,0 +1,84 @@
+            * {
+                padding: 0px;
+                margin: 0px;
+            }
+            
+            #warper ul {
+                list-style: none;
+            }
+            
+            #warper a {
+                text-decoration: none;
+            }
+            
+            .container {
+                margin: 0px auto;
+                max-width: 960px;
+            }
+            
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #000;
+                color: #fff;
+                z-index: 99999;
+            }
+            
+            #logo {
+                color: #fff;
+                /* dùng để viết hoa */
+                font-family: 'Orbitron', sans-serif !important;
+                font-weight: bold;
+                /* in đậm */
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+                /* khoảng cách giữa các chữ */
+            }
+            
+            .inner-heder {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            header {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                border-bottom: 1px solid #fff;
+            }
+            
+            ul#main_menu {
+                display: flex;
+            }
+            
+            ul#main_menu a {
+                text-transform: uppercase;
+                padding: 10px 20px;
+                display: block;
+                color: #fff;
+            }
+            
+            .banner {
+                background-image: url(../images/bodyimg.jpg);
+                min-height: 400px;
+                width: 100%;
+                /* k lặp lại hình ảnh */
+            }
+            
+            header.sticky {
+                background: rgb(43, 42, 42);
+                opacity: 0.9;
+                color: #000;
+                z-index: 999999;
+            }
+            
+            header.sticky #main_menu a {
+                color: #fc6b4f;
+            }
+            
+            header.sticky #logo {
+                font-family: 'Orbitron', sans-serif;
+                color: #c3f021;
+                text-shadow: 1px 1px 2px black, 0px 0px 30px #c4ef26;
+            }
