@@ -1,5 +1,5 @@
 <?php
-
+   session_start();
   require_once("../db/dbhepler.php");
   
    if(isset($_POST['login']))

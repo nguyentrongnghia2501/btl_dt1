@@ -1,4 +1,8 @@
 <?php 
+session_start();
+if(!isset($_SESSION['name'])){
+     header('location:login_use.php');
+}
 require_once("../db/dbhepler.php");
 
 ?>
@@ -177,9 +181,9 @@ $cout= mysqli_num_rows($rs);
                             <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
 
                                 <li><a class="dropdown-item" href="#">Đổi Mật Khẩu</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="logout_use.php"> Đăng xuất</a></li>
 
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                               
                             </ul>
                         </li>
                         <li style="padding-top: 5px;">

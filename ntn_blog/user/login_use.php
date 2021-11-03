@@ -1,7 +1,7 @@
 <?php
 
   require_once("../db/dbhepler.php");
-  
+  session_start();
    if(isset($_POST['login']))
    {
            if(empty($_POST['email'])|| empty($_POST['password'])){
@@ -16,7 +16,9 @@
             $re= mysqli_query($con,$sqx);
             // truy vấn vào csdl
             if(mysqli_num_rows($re)>0){
+                    
                       header("location:index.php");
+                        $_SESSION['name']= $email;
             }
             else{
                 $_SESSION['warring'] = "Sai tài khoản hoặc mật khẩu";

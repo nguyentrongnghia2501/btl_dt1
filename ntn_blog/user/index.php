@@ -1,8 +1,14 @@
 <?php 
+session_start();
+if(!isset($_SESSION['name'])){
+     header('location:login_use.php');
+}
+
 require_once("../db/dbhepler.php");
 $sql= "SELECT * FROM notification WHERE statust=0";
 $rs= mysqli_query($con,$sql);
 $cout= mysqli_num_rows($rs);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +166,7 @@ $cout= mysqli_num_rows($rs);
                             <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
 
                                 <li><a class="dropdown-item" href="#">Đổi Mật Khẩu</a></li>
-                                <li><a class="dropdown-item" href="#">Đăng Xuất</a></li>
+                                <li><a class="dropdown-item" href="logout_use.php">Đăng Xuất</a></li>
 
                                 
                             </ul>
