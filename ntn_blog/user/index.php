@@ -2,8 +2,9 @@
 session_start();
 if(!isset($_SESSION['name'])){
      header('location:login_use.php');
+   
 }
-
+$emailx=$_SESSION['name'];
 require_once("../db/dbhepler.php");
 $sql= "SELECT * FROM notification WHERE statust=0";
 $rs= mysqli_query($con,$sql);
@@ -160,8 +161,8 @@ $cout= mysqli_num_rows($rs);
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../public/images/g2.jpg" alt="Avatar Logo" style="width:40px;"
-                                    class="rounded-pill">
+                               
+                                
                             </a>
                             <ul class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
 
